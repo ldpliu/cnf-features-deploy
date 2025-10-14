@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ztp-clusters-01
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ztp-clusters-01
+  namespace: openshift-gitops
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ztp-clusters-01
+  project: ztp-app-project
+  source:
+    path: ztp/gitops-subscriptions/argocd/cluster/ztp-clusters-01
+    repoURL: http://testadmin:testadmin@10.1.228.102:3000/testadmin/cnf-features-deploy.git
+    targetRevision: release-4.19
+  ignoreDifferences: # recommended way to allow ACM controller to manage its fields. alternative approach documented below (1)
+  - group: cluster.open-cluster-management.io
+    kind: ManagedCluster
+    managedFieldsManagers:
+    - controller
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=background
+    - RespectIgnoreDifferences=true
