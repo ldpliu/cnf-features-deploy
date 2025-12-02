@@ -1,0 +1,49 @@
+--- 
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "group-du-sno-25b"
+  namespace: "ztp-group-du-sno"
+spec:
+  bindingRules:
+    logicalGroup: "25b"
+    group-du-sno: ""
+  mcp: "master"
+  sourceFiles:
+  # All config-policy are in wave10 in this file
+    ## Disable Console Operator
+    - fileName: ztp-generate/ConsoleOperatorDisable.yaml
+      policyName: "config-policy"
+
+    - fileName: Secret.yaml
+      policyName: "config-policy"
+      metadata:
+        name: kafka-secret
+        namespace: "openshift-logging"
+        labels:
+          lca.openshift.io/target-ocp-version: "4.18.13"
+      data:
+        ca-bundle.crt: 'bGRhcC1jb25maWcK'
+        tls.crt: 'bGRhcC1jb25maWcK'
+        tls.key: 'bGRhcC1jb25maWcK'
+
+    ## LDAP CA Cert Bundle
+    - fileName: ConfigMap.yaml
+      policyName: "config-policy"
+      metadata:
+        name: vz-ldap-ca-config-map
+        namespace: "openshift-config"
+        labels:
+          lca.openshift.io/target-ocp-version: "4.18.13"
+      data:
+        ca.crt: "cacrt"
+    ## LDAP Password
+    - fileName: Secret.yaml
+      policyName: "config-policy"
+      metadata:
+        name: vz-ldap-secret
+        namespace: "openshift-config"
+        labels:
+          lca.openshift.io/target-ocp-version: "4.18.13"
+      data:
+        bindPassword: 'bGRhcC1jb25maWcK'

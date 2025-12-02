@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - common-ns.yaml
+  - group-du-sno-namespace.yaml
+  - ericsson-vdu-spr-namespace.yaml
+  - group-du-sno-ldap-config.yaml
+  - group-du-sno-log-secret.yaml

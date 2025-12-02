@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ldap-config
+  namespace: ztp-group-du-sno
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
+data:
+  adminGroup: "<<LDAP Admin Group>>"
+  bindDN: "<<LDAP Bind DN>>"
+  bindPassword: "<<LDAP Bind Password>>"
+  caBundleCrt: "<<LDAP CA Certificates>>"
+  url: "<<LDAPS URL>>"

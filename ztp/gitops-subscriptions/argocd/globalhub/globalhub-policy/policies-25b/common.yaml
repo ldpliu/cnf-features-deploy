@@ -1,0 +1,22 @@
+---
+apiVersion: ran.openshift.io/v1 
+kind: PolicyGenTemplate
+metadata:
+  name: "common-25b"
+  namespace: "ztp-common"
+spec:
+  bindingRules:
+    logicalGroup: "25b"
+    common: "true"
+  sourceFiles:
+    ## CatalogSource
+    - fileName: ztp-generate/DefaultCatsrc.yaml
+      policyName: "config-policy"
+      metadata:
+        name: redhat-operators-disconnected
+        labels:
+          lca.openshift.io/target-ocp-version: "4.18.13"
+      spec:
+        displayName: disconnected-redhat-operator-index
+        image: <<Artifactory FQDN>>/fe_platform_docker/catalogs/sno-operator-index:1.3.0
+    ## ImageContentSourcePolicy

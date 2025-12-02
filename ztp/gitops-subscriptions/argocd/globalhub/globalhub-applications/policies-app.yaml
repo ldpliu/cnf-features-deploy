@@ -6,7 +6,7 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: policies
+  name: policies-v
   namespace: openshift-gitops
 spec:
   destination:
@@ -14,7 +14,7 @@ spec:
     namespace: policies-sub
   project: policy-app-project
   source:
-    path: ztp/gitops-subscriptions/argocd/example/policygentemplates
+    path: ztp/gitops-subscriptions/argocd/globalhub/globalhub-policy
     repoURL: 'http://testadmin:testadmin@10.1.228.102:3000/testadmin/cnf-features-deploy.git'
     targetRevision: ztp-global-test
     # uncomment the below plugin if you will be adding the plugin binaries in the same repo->dir where
