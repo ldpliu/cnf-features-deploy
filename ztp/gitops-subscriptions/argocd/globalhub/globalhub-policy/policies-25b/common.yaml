@@ -20,3 +20,8 @@ spec:
         displayName: disconnected-redhat-operator-index
         image: <<Artifactory FQDN>>/fe_platform_docker/catalogs/sno-operator-index:1.3.0
     ## ImageContentSourcePolicy
+    - fileName: ztp-generate/QuaySubscription.yaml
+      policyName: "subscriptions-policy"
+      spec:
+        source: community-operators
+        name: project-quay
