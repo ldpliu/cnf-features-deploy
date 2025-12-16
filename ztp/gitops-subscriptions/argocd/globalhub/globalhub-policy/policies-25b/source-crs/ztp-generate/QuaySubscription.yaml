@@ -7,7 +7,6 @@ metadata:
     ran.openshift.io/ztp-deploy-wave: "2"
 spec:
   name: project-quay
-  namespace: openshift-operators
   channel: stable-3.15
   source: community-operators
   sourceNamespace: openshift-marketplace
